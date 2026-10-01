@@ -51,4 +51,31 @@
   border: 2px solid var(--ink-300); display: grid; place-items: center;
   flex-shrink: 0; transition: all var(--t); background: #fff;
 }
-.c
+.categoria-item .check-icon::after {
+  content: ""; width: 10px; height: 10px; border-radius: 3px;
+  background: transparent; transition: background var(--t);
+}
+.categoria-item input:checked ~ .check-icon { border-color: var(--blue-600); background: var(--blue-600); }
+.categoria-item input:checked ~ .check-icon::after { background: #fff; }
+.categoria-item input:checked ~ .cat-label { color: var(--blue-700); }
+.categoria-item:has(input:checked) { border-color: var(--blue-600); background: var(--blue-50); }
+
+.form-termos { margin-bottom: 24px; }
+.checkbox-label {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: .9rem; color: var(--ink-700); cursor: pointer; line-height: 1.5;
+}
+.checkbox-label input {
+  margin-top: 4px; width: 18px; height: 18px; flex-shrink: 0;
+  cursor: pointer; accent-color: var(--blue-600);
+}
+.checkbox-label a { color: var(--blue-600); font-weight: 600; }
+
+.form-footer { text-align: center; margin-top: 20px; font-size: .9rem; color: var(--ink-500); }
+.form-footer a { color: var(--blue-600); font-weight: 700; }
+
+@media (max-width: 700px) {
+  .cadastro-hero { padding: 40px 0 30px; }
+  .cadastro-card { padding: 22px 18px; }
+  .categorias-grid { grid-template-columns: 1fr; }
+}
