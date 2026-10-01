@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cadastro de Cliente — SERVIX</title>
+<link rel="icon" type="image/png" href="https://i.postimg.cc/QxPKh1kx/83fb69c1-108b-4dad-8e00-5b7ead62e1db.png" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/global.css" />
+<link rel="stylesheet" href="css/cadastro.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">
+      <img class="brand-logo" src="https://i.postimg.cc/QxPKh1kx/83fb69c1-108b-4dad-8e00-5b7ead62e1db.png" alt="SERVIX" />
+      <span>SERVIX</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Sou profissional</a>
+      <a href="cadastro-cliente.html" class="is-active">Sou cliente</a>
+      <a href="login.html">Entrar</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="cadastro-hero">
+    <div class="container cadastro-hero-inner">
+      <span class="eyebrow"><span class="eyebrow-dot"></span> Para clientes</span>
+      <h1>Crie sua conta e encontre o serviço que precisa</h1>
+      <p>Cadastre-se como cliente e solicite serviços de profissionais qualificados. Rápido, seguro e sem custo.</p>
+    </div>
+  </section>
+
+  <section class="cadastro-section">
+    <div class="container cadastro-container">
+      <div class="cadastro-card">
+        <div id="alerta" class="alerta" style="display: none;"></div>
+
+        <form id="form-cadastro" novalidate>
+
+          <fieldset class="form-grupo">
+            <legend><span class="legend-num">1</span> Tipo de conta</legend>
+            <div class="tipo-opcoes">
+              <label class="tipo-item">
+                <input type="radio" name="tipo" value="pessoa-fisica" checked />
+                <span class="tipo-card">
+                  <strong>Pessoa Física</strong>
+                  <small>Para uso pessoal</small>
+                </span>
+              </label>
+              <label class="tipo-item">
+                <input type="radio" name="tipo" value="empresa" />
+                <span class="tipo-card">
+                  <strong>Empresa</strong>
+                  <small>Para sua empresa</small>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-grupo">
+            <legend><span class="legend-num">2</span> Dados pessoais</legend>
+
+            <div class="field-row">
+              <div class="field" data-field="nome">
+                <label for="nome">Nome completo <span class="required">*</span></label>
+                <input type="text" id="nome" placeholder="Ex.: Ana Lima" required />
+                <small class="erro-msg"></small>
+              </div>
+              <div class="field" data-field="email">
+                <label for="email">E-mail <span class="required">*</span></label>
+                <input type="email" id="email" placeholder="voce@email.com" required />
+                <small class="erro-msg"></small>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field" data-field="senha">
+                <label for="senha">Senha <span class="required">*</span></label>
+                <input type="password" id="senha" placeholder="Mínimo 6 caracteres" required minlength="6" />
+                <small class="erro-msg"></small>
+              </div>
+              <div class="field" data-field="senhaConfirm">
+                <label for="senhaConfirm">Confirmar senha <span class="required">*</span></label>
+                <input type="password" id="senhaConfirm" placeholder="Repita a senha" required />
+                <small class="erro-msg"></small>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field" data-field="telefone">
+                <label for="telefone">Telefone / WhatsApp <span class="required">*</span></label>
+                <input type="tel" id="telefone" placeholder="(00) 00000-0000" required />
+                <small class="erro-msg"></small>
+              </div>
+              <div class="field" data-field="cpfCnpj" id="wrapper-doc">
+                <label for="cpfCnpj">CPF (opcional)</label>
+                <input type="text" id="cpfCnpj" placeholder="000.000.000-00" maxlength="18" />
+                <small class="erro-msg"></small>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-grupo">
+            <legend><span class="legend-num">3</span> Localização</legend>
+            <div class="field-row">
+              <div class="field" data-field="cidade">
+                <label for="cidade">Cidade <span class="required">*</span></label>
+                <input type="text" id="cidade" placeholder="Ex.: São Paulo" required />
+                <small class="erro-msg"></small>
+              </div>
+              <div class="field" data-field="estado">
+                <label for="estado">Estado <span class="required">*</span></label>
+                <select id="estado" required>
+                  <option value="">Selecione</option>
+                  <option value="AC">Acre</option><option value="AL">Alagoas</option>
+                  <option value="AP">Amapá</option><option value="AM">Amazonas</option>
+                  <option value="BA">Bahia</option><option value="CE">Ceará</option>
+                  <option value="DF">Distrito Federal</option><option value="ES">Espírito Santo</option>
+                  <option value="GO">Goiás</option><option value="MA">Maranhão</option>
+                  <option value="MT">Mato Grosso</option><option value="MS">Mato Grosso do Sul</option>
+                  <option value="MG">Minas Gerais</option><option value="PA">Pará</option>
+                  <option value="PB">Paraíba</option><option value="PR">Paraná</option>
+                  <option value="PE">Pernambuco</option><option value="PI">Piauí</option>
+                  <option value="RJ">Rio de Janeiro</option><option value="RN">Rio Grande do Norte</option>
+                  <option value="RS">Rio Grande do Sul</option><option value="RO">Rondônia</option>
+                  <option value="RR">Roraima</option><option value="SC">Santa Catarina</option>
+                  <option value="SP">São Paulo</option><option value="SE">Sergipe</option>
+                  <option value="TO">Tocantins</option>
+                </select>
+                <small class="erro-msg"></small>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field" data-field="bairro">
+                <label for="bairro">Bairro</label>
+                <input type="text" id="bairro" placeholder="Ex.: Centro" />
+                <small class="erro-msg"></small>
+              </div>
+              <div class="field" data-field="cep">
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" placeholder="00000-000" maxlength="9" />
+                <small class="erro-msg"></small>
+              </div>
+            </div>
+            <div class="field" data-field="endereco">
+              <label for="endereco">Endereço</label>
+              <input type="text" id="endereco" placeholder="Rua, número, complemento" />
+              <small class="erro-msg"></small>
+            </div>
+          </fieldset>
+
+          <div class="form-termos">
+            <label class="checkbox-label">
+              <input type="checkbox" id="termos" required />
+              <span>Concordo com os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a></span>
+            </label>
+            <small class="erro-msg" style="color: var(--red-600); display: none;"></small>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg" id="btn-enviar">
+            <span class="btn-text">Criar minha conta de cliente</span>
+            <span class="spinner"></span>
+          </button>
+
+          <p class="form-footer">
+            Já tem conta? <a href="login.html">Faça login</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="ano"></span> SERVIX. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/cadastro-cliente.js"></script>
+</body>
+</html>
