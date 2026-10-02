@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Painel Admin — SERVIX</title>
+<link rel="icon" type="image/png" href="https://i.postimg.cc/QxPKh1kx/83fb69c1-108b-4dad-8e00-5b7ead62e1db.png" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/global.css" />
+<link rel="stylesheet" href="css/painel.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">
+      <img class="brand-logo" src="https://i.postimg.cc/QxPKh1kx/83fb69c1-108b-4dad-8e00-5b7ead62e1db.png" alt="SERVIX" />
+      <span>SERVIX</span>
+    </a>
+    <nav class="nav">
+      <span id="nome-usuario" style="font-weight: 600; padding: 0 10px;"></span>
+      <a href="#" onclick="logout(); return false;" class="btn-logout">Sair</a>
+    </nav>
+  </div>
+</header>
+
+<div class="painel-layout">
+
+  <aside class="painel-sidebar">
+    <h3>Menu</h3>
+    <nav>
+      <a href="#dashboard" class="is-active" data-aba="dashboard">📊 Dashboard</a>
+      <a href="#profissionais" data-aba="profissionais">👷 Profissionais</a>
+      <a href="#clientes" data-aba="clientes">👥 Clientes</a>
+    </nav>
+  </aside>
+
+  <main class="painel-conteudo">
+
+    <div id="alerta" class="alerta" style="display: none;"></div>
+
+    <!-- ABA: DASHBOARD -->
+    <section id="aba-dashboard">
+      <div class="painel-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p>Visão geral da plataforma</p>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num" id="stat-prof">—</div>
+          <div class="stat-label">Profissionais cadastrados</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-prof-pend">—</div>
+          <div class="stat-label">Profissionais pendentes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-clientes">—</div>
+          <div class="stat-label">Clientes cadastrados</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-clientes-ativos">—</div>
+          <div class="stat-label">Clientes ativos</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABA: PROFISSIONAIS -->
+    <section id="aba-profissionais" class="hidden">
+      <div class="painel-header">
+        <div>
+          <h1>Profissionais</h1>
+          <p>Gerencie todos os profissionais cadastrados</p>
+        </div>
+      </div>
+
+      <div class="tabela-wrapper">
+        <div class="tabela-header">
+          <h2>Lista de profissionais</h2>
+          <div class="filtros">
+            <input type="text" id="filtro-prof" placeholder="🔍 Buscar por nome ou email" />
+            <select id="filtro-status-prof">
+              <option value="">Todos os status</option>
+              <option value="pendente">Pendentes</option>
+              <option value="ativo">Ativos</option>
+              <option value="suspenso">Suspensos</option>
+              <option value="inativo">Inativos</option>
+            </select>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Profissional</th>
+              <th>Cidade</th>
+              <th>Categorias</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="lista-profissionais">
+            <tr><td colspan="5" class="empty-state">Carregando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ABA: CLIENTES -->
+    <section id="aba-clientes" class="hidden">
+      <div class="painel-header">
+        <div>
+          <h1>Clientes</h1>
+          <p>Gerencie todos os clientes cadastrados</p>
+        </div>
+      </div>
+
+      <div class="tabela-wrapper">
+        <div class="tabela-header">
+          <h2>Lista de clientes</h2>
+          <div class="filtros">
+            <input type="text" id="filtro-cliente" placeholder="🔍 Buscar por nome ou email" />
+            <select id="filtro-status-cliente">
+              <option value="">Todos os status</option>
+              <option value="ativo">Ativos</option>
+              <option value="inativo">Inativos</option>
+              <option value="bloqueado">Bloqueados</option>
+            </select>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Cidade</th>
+              <th>Tipo</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="lista-clientes">
+            <tr><td colspan="5" class="empty-state">Carregando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="ano"></span> SERVIX. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
