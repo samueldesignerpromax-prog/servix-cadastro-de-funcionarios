@@ -56,3 +56,53 @@ document.addEventListener('DOMContentLoaded', () => {
       esconderAlerta(alerta);
       form.reset();
       limparErros();
+    });
+  });
+
+  form.addEventListener('submit', enviarFormulario);
+});
+
+async function enviarFormulario(e) {
+  e.preventDefault();
+  esconderAlerta(alerta);
+  limparErros();
+
+  const email = document.getElementById('email').value.trim();
+  const senha = document.getElementById('senha').value;
+
+  const erros = [];
+  if (!email) erros.push({ campo: 'email', msg: 'Informe seu e-mail' });
+  else if (!/^\S+@\S+\.\S+$/.test(email)) erros.push({ campo: 'email', msg: 'E-mail inválido' });
+  if (!senha) erros.push({ campo: 'senha', msg: 'Informe sua senha' });
+
+  if (erros.length > 0) {
+    mostrarErros(erros);
+    return;
+  }
+
+  btnEnviar.classList.add('loading');
+  btnEnviar.disabled = true;
+
+  try {
+    const t = TEXTOS[tipoAtual];
+    const endpoint = CONFIG.ENDPOINTS[t.endpoint];
+    const resposta = await chamarAPI(endpoint, 'POST', { email, senha });
+
+    // Pega usuário e token da resposta
+    const dados = resposta.dados;
+    const usuario = dados.cliente || dados.profissional || dados.admin;
+    const token = dados.token;
+
+    salvarSessao(token, usuario, tipoAtual);
+    mostrarAlerta(alerta, 'sucesso', '✅ Login realizado! Redirecionando...');
+
+    setTimeout(() => {
+      window.location.href = t.destino;
+    }, 800);
+  } catch (error) {
+    mostrarAlerta(alerta, 'erro', error.message || 'Erro ao fazer login');
+  } finally {
+    btnEnviar.classList.remove('loading');
+    btnEnviar.disabled = false;
+  }
+}
