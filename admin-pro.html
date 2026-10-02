@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Painel ADM PRO — SERVIX</title>
+<link rel="icon" type="image/png" href="https://i.postimg.cc/QxPKh1kx/83fb69c1-108b-4dad-8e00-5b7ead62e1db.png" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/global.css" />
+<link rel="stylesheet" href="css/painel.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="admin-pro.html" class="brand">
+      <img class="brand-logo" src="https://i.postimg.cc/QxPKh1kx/83fb69c1-108b-4dad-8e00-5b7ead62e1db.png" alt="SERVIX" />
+      <span>SERVIX</span>
+      <span class="badge badge-pro" style="margin-left: 8px;">PRO</span>
+    </a>
+    <nav class="nav">
+      <a href="admin.html">Painel ADM</a>
+      <span id="nome-usuario" style="font-weight: 600; padding: 0 10px;"></span>
+      <a href="#" onclick="logout(); return false;" class="btn-logout">Sair</a>
+    </nav>
+  </div>
+</header>
+
+<div class="painel-layout">
+
+  <aside class="painel-sidebar">
+    <h3>Administração PRO</h3>
+    <nav>
+      <a href="#dashboard" class="is-active" data-aba="dashboard">📊 Dashboard</a>
+      <a href="#admins" data-aba="admins">🔐 Administradores</a>
+      <a href="#profissionais" data-aba="profissionais">👷 Profissionais</a>
+      <a href="#clientes" data-aba="clientes">👥 Clientes</a>
+    </nav>
+  </aside>
+
+  <main class="painel-conteudo">
+
+    <div id="alerta" class="alerta" style="display: none;"></div>
+
+    <!-- DASHBOARD -->
+    <section id="aba-dashboard">
+      <div class="painel-header">
+        <div>
+          <h1>Painel PRO</h1>
+          <p>Visão completa da plataforma SERVIX</p>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num" id="stat-admins">—</div>
+          <div class="stat-label">Administradores</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-prof">—</div>
+          <div class="stat-label">Profissionais</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-prof-pend">—</div>
+          <div class="stat-label">Profissionais pendentes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-clientes">—</div>
+          <div class="stat-label">Clientes</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMINS -->
+    <section id="aba-admins" class="hidden">
+      <div class="painel-header">
+        <div>
+          <h1>Administradores</h1>
+          <p>Crie e gerencie os administradores do sistema</p>
+        </div>
+        <button class="btn btn-primary" onclick="abrirModalCriarAdmin()">➕ Novo administrador</button>
+      </div>
+      <div class="tabela-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Admin</th>
+              <th>Nível</th>
+              <th>Status</th>
+              <th>Criado em</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="lista-admins">
+            <tr><td colspan="5" class="empty-state">Carregando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PROFISSIONAIS -->
+    <section id="aba-profissionais" class="hidden">
+      <div class="painel-header">
+        <div>
+          <h1>Profissionais</h1>
+          <p>Todos os profissionais da plataforma</p>
+        </div>
+      </div>
+      <div class="tabela-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Profissional</th>
+              <th>Cidade</th>
+              <th>Status</th>
+              <th>Criado em</th>
+            </tr>
+          </thead>
+          <tbody id="lista-profissionais">
+            <tr><td colspan="4" class="empty-state">Carregando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CLIENTES -->
+    <section id="aba-clientes" class="hidden">
+      <div class="painel-header">
+        <div>
+          <h1>Clientes</h1>
+          <p>Todos os clientes da plataforma</p>
+        </div>
+      </div>
+      <div class="tabela-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Cidade</th>
+              <th>Tipo</th>
+              <th>Status</th>
+              <th>Criado em</th>
+            </tr>
+          </thead>
+          <tbody id="lista-clientes">
+            <tr><td colspan="5" class="empty-state">Carregando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- MODAL CRIAR ADMIN -->
+<div class="modal-overlay" id="modal-admin">
+  <div class="modal">
+    <h3>Criar novo administrador</h3>
+    <p>O novo admin terá acesso ao painel de gestão.</p>
+
+    <div id="modal-alerta" class="alerta" style="display: none;"></div>
+
+    <form id="form-admin" novalidate>
+      <div class="field" data-field="nome">
+        <label for="admin-nome">Nome completo <span class="required">*</span></label>
+        <input type="text" id="admin-nome" required />
+        <small class="erro-msg"></small>
+      </div>
+      <div class="field" data-field="email">
+        <label for="admin-email">E-mail <span class="required">*</span></label>
+        <input type="email" id="admin-email" required />
+        <small class="erro-msg"></small>
+      </div>
+      <div class="field" data-field="senha">
+        <label for="admin-senha">Senha (mínimo 8 caracteres) <span class="required">*</span></label>
+        <input type="password" id="admin-senha" required minlength="8" />
+        <small class="erro-msg"></small>
+      </div>
+      <div class="field" data-field="telefone">
+        <label for="admin-telefone">Telefone (opcional)</label>
+        <input type="tel" id="admin-telefone" />
+        <small class="erro-msg"></small>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" onclick="fecharModalAdmin()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" id="btn-criar-admin">
+          <span class="btn-text">Criar administrador</span>
+          <span class="spinner"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="ano"></span> SERVIX. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/admin-pro.js"></script>
+</body>
+</html>
